@@ -485,6 +485,7 @@
             height: 300px;
             background: var(--light-accent);
             overflow: hidden;
+            cursor: pointer;
         }
 
         .portfolio-image img {
@@ -535,6 +536,91 @@
             color: var(--text-secondary);
             line-height: 1.8;
             font-size: 1.05rem;
+        }
+
+        /* Lightbox Styles */
+        .lightbox {
+            display: none;
+            position: fixed;
+            z-index: 9999;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.95);
+            animation: fadeIn 0.3s ease;
+        }
+
+        .lightbox.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .lightbox-content {
+            position: relative;
+            max-width: 90%;
+            max-height: 90%;
+            animation: scaleIn 0.3s ease;
+        }
+
+        @keyframes scaleIn {
+            from {
+                transform: scale(0.8);
+                opacity: 0;
+            }
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        .lightbox-content img {
+            max-width: 100%;
+            max-height: 90vh;
+            display: block;
+            margin: 0 auto;
+            border-radius: 8px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            font-size: 40px;
+            font-weight: bold;
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 10000;
+            background: rgba(0,0,0,0.5);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            line-height: 1;
+        }
+
+        .lightbox-close:hover {
+            background: var(--accent);
+            transform: rotate(90deg);
+        }
+
+        .lightbox-caption {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: white;
+            background: rgba(0,0,0,0.7);
+            padding: 1rem 2rem;
+            border-radius: 25px;
+            font-size: 1.1rem;
+            max-width: 80%;
+            text-align: center;
         }
 
         /* Contact Section */
@@ -645,6 +731,19 @@
                 grid-template-columns: repeat(2, 1fr);
                 gap: 2rem;
             }
+
+            .lightbox-close {
+                top: 10px;
+                right: 10px;
+                font-size: 30px;
+                width: 40px;
+                height: 40px;
+            }
+
+            .lightbox-caption {
+                font-size: 0.9rem;
+                padding: 0.75rem 1.5rem;
+            }
         }
 
         /* Smooth Scroll */
@@ -726,7 +825,44 @@
         </div>
     </section>
 
-    <!-- Experience Section -->
+    <!-- Portfolio Section (MOVED UP) -->
+    <section id="portfolio" class="section">
+        <div class="section-header reveal">
+            <h2>Featured Work</h2>
+            <p style="color: var(--text-secondary); max-width: 700px; margin: 1rem auto 0;">A selection of projects and initiatives that demonstrate strategic thinking, execution excellence, and measurable impact.</p>
+        </div>
+        <div class="portfolio-grid">
+            <div class="portfolio-item reveal">
+                <div class="portfolio-image" onclick="openLightbox('./images/CRPproblemexpanded.png', 'Customer Problem Resolution System')">
+                    <img src="./images/CRPproblemexpanded.png" alt="Customer Problem Resolution System">
+                </div>
+                <div class="portfolio-content">
+                    <h3>Customer Problem Resolution System</h3>
+                    <p class="portfolio-description">Reduced total case volume by 40% by increasing the amount of information available to sellers before an A-to-z Guarantee claim was even filed against them. Redesigned the problem management page to better deliver this info. Tested the hypotheses on core customer experience values of having a problem resolved in a single contact by a third-party seller adding more value than the problem being solved by the platform/Amazon while also building trust with sellers that Amazon had their back when resolving an issue.</p>
+                </div>
+            </div>
+            <div class="portfolio-item reveal">
+                <div class="portfolio-image" onclick="openLightbox('./images/DesignedResolutionFlow.png', 'User Journey Design Mapping')">
+                    <img src="./images/DesignedResolutionFlow.png" alt="User Journey Design Mapping">
+                </div>
+                <div class="portfolio-content">
+                    <h3>User Journey Design Mapping</h3>
+                    <p class="portfolio-description">Improved seller satisfaction by 2% on 33% of total case volume by designing a new "golden path" workflow for the highest frustration user problems. This use case was chosen to illustrate the new design because every potential event, system action, and outcome that other use cases have could occur in this single scenario.</p>
+                </div>
+            </div>
+            <div class="portfolio-item reveal">
+                <div class="portfolio-image" onclick="openLightbox('./images/CStooling.png', 'Internal Tooling Workflows')">
+                    <img src="./images/CStooling.png" alt="Internal Tooling Workflows">
+                </div>
+                <div class="portfolio-content">
+                    <h3>Internal Tooling Workflows</h3>
+                    <p class="portfolio-description">Eliminated 8% of manual case volume to operations by designing features that reduced repeat contacts from customers by 92% and reduced the misfile rate for cases filed by customer service teams from 22% to 5%. Pictured is a v1 mockup I designed to illustrate the basic desired functionality.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section (MOVED DOWN) -->
     <section id="experience" class="section">
         <div class="section-header reveal">
             <h2>Professional Journey</h2>
@@ -822,57 +958,6 @@
         </div>
     </section>
 
-    <!-- Portfolio Section -->
-    <section id="portfolio" class="section">
-        <div class="section-header reveal">
-            <h2>Featured Work</h2>
-            <p style="color: var(--text-secondary); max-width: 700px; margin: 1rem auto 0;">A selection of projects and initiatives that demonstrate strategic thinking, execution excellence, and measurable impact.</p>
-        </div>
-        <div class="portfolio-grid">
-            <div class="portfolio-item reveal">
-                <div class="portfolio-image">
-                    <img id="portfolio-img-1" src="./images/CRPproblemexpanded.png" alt="Customer Problem Resolution System" style="display: block;">
-                    <div class="image-placeholder" style="display: none;">
-                        <span>📷</span>
-                        <p>Upload Image 1</p>
-                    </div>
-                </div>
-                <div class="portfolio-content">
-                    <h3 id="portfolio-title-1">Customer Problem Resolution System</h3>
-                    <p id="portfolio-desc-1" class="portfolio-description">Reduced total case volume by 40% by increasing the amount of information available to sellers before an A-to-z Guarantee claim was even filed against them. Redesigned the problem management page to better deliver this info. Tested the hypotheses on core customer experience values of having a problem resolved in a single contact by a third-party seller adding more value than the problem being solved by the platform/Amazon while also building trust with sellers that Amazon had their back when resolving an issue.</p>
-                </div>
-            </div>
-            <div class="portfolio-item reveal">
-                <div class="portfolio-image">
-                    <img id="portfolio-img-2" src="./images/DesignedResolutionFlow.png" alt="User Journey Design Mapping" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" style="display: block;">
-                    <div class="image-placeholder" style="display: none;">
-                        <span>🖼️</span>
-                        <p>User Journey Workflow Design</p>
-                        <small style="opacity: 0.6; margin-top: 0.5rem;">Image: DesignedResolutionFlow.png</small>
-                    </div>
-                </div>
-                <div class="portfolio-content">
-                    <h3 id="portfolio-title-2">User Journey Design Mapping</h3>
-                    <p id="portfolio-desc-2" class="portfolio-description">Improved seller satisfaction by 2% on 33% of total case volume by designing a new "golden path" workflow for the highest frustration user problems. This use case was chosen to illustrate the new design because every potential event, system action, and outcome that other use cases have could occur in this single scenario.</p>
-                </div>
-            </div>
-            <div class="portfolio-item reveal">
-                <div class="portfolio-image">
-                    <img id="portfolio-img-3" src="./images/CStooling.png" alt="Internal Tooling Workflows" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                    <div class="image-placeholder" style="display: none;">
-                        <span>🖼️</span>
-                        <p>Internal Tooling Workflow Design</p>
-                        <small style="opacity: 0.6; margin-top: 0.5rem;">Image: CStooling.png</small>
-                    </div>
-                </div>
-                <div class="portfolio-content">
-                    <h3 id="portfolio-title-3">Internal Tooling Workflows</h3>
-                    <p id="portfolio-desc-3" class="portfolio-description">Eliminated 8% of manual case volume to operations by designing features that reduced repeat contacts from customers by 92% and reduced the misfile rate for cases filed by customer service teams from 22% to 5%. Pictured is a v1 mockup I designed to illustrate the basic desired functionality.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
     <!-- Education & Languages -->
     <section class="section">
         <div class="section-header reveal">
@@ -910,7 +995,7 @@
                     <span>LinkedIn</span>
                     <span>↗</span>
                 </a>
-                <a href="/cdn-cgi/l/email-protection#462c2728682b25212e2323767f06212b272f2a6825292b" class="contact-link">
+                <a href="mailto:jan@example.com" class="contact-link">
                     <span>Email</span>
                     <span>↗</span>
                 </a>
@@ -922,7 +1007,50 @@
         </div>
     </section>
 
-    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+    <!-- Lightbox Modal -->
+    <div id="lightbox" class="lightbox" onclick="closeLightbox(event)">
+        <span class="lightbox-close" onclick="closeLightbox(event)">&times;</span>
+        <div class="lightbox-content">
+            <img id="lightbox-img" src="" alt="">
+            <div class="lightbox-caption" id="lightbox-caption"></div>
+        </div>
+    </div>
+
+    <script>
+        // Lightbox Functions
+        function openLightbox(imgSrc, caption) {
+            const lightbox = document.getElementById('lightbox');
+            const lightboxImg = document.getElementById('lightbox-img');
+            const lightboxCaption = document.getElementById('lightbox-caption');
+            
+            lightbox.classList.add('active');
+            lightboxImg.src = imgSrc;
+            lightboxCaption.textContent = caption;
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeLightbox(event) {
+            const lightbox = document.getElementById('lightbox');
+            const lightboxContent = document.querySelector('.lightbox-content');
+            
+            // Only close if clicking outside the image or on close button
+            if (event.target === lightbox || event.target.classList.contains('lightbox-close')) {
+                lightbox.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            }
+        }
+
+        // Close lightbox with Escape key
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                const lightbox = document.getElementById('lightbox');
+                if (lightbox.classList.contains('active')) {
+                    lightbox.classList.remove('active');
+                    document.body.style.overflow = 'auto';
+                }
+            }
+        });
+
         // Reveal animation on scroll
         const reveals = document.querySelectorAll('.reveal');
         
@@ -989,21 +1117,18 @@
                     const text = numberElement.innerText;
                     
                     if (text.includes('$') && text.includes('M')) {
-                        // Extract the number from text like "$15.3M+"
                         const matches = text.match(/\$([\d.]+)M/);
                         if (matches) {
                             const num = parseFloat(matches[1]);
                             animateValue(numberElement, 0, num, 1500, '$', 'M+');
                         }
                     } else if (text.includes('M')) {
-                        // Extract the number from text like "10.6M"
                         const matches = text.match(/([\d.]+)M/);
                         if (matches) {
                             const num = parseFloat(matches[1]);
                             animateValue(numberElement, 0, num, 1500, '', 'M');
                         }
                     } else if (text.includes('%')) {
-                        // Extract the number from text like "32%"
                         const matches = text.match(/([\d]+)%/);
                         if (matches) {
                             const num = parseInt(matches[1]);
