@@ -39,7 +39,7 @@
             display: flex;
             align-items: center;
             padding: 2rem;
-            background: linear-gradient(135deg, #fff 0%, var(--light-accent) 100%);
+            background: linear-gradient(135deg, #f8f8f8 0%, #ffe8c5 100%);
             overflow: hidden;
         }
 
@@ -170,6 +170,18 @@
             box-shadow: 0 10px 30px rgba(0,0,0,0.2);
         }
 
+        .btn-linkedin {
+            background: #0A66C2;
+            color: white;
+        }
+
+        .btn-linkedin:hover {
+            background: #004182;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(10, 102, 194, 0.3);
+        }
+
+
         /* Visual Element */
         .hero-visual {
             position: relative;
@@ -189,11 +201,6 @@
             box-shadow: 0 20px 60px rgba(0,0,0,0.1);
             position: relative;
             transform: rotate(-2deg);
-            transition: transform 0.3s ease;
-        }
-
-        .expertise-card:hover {
-            transform: rotate(0deg);
         }
 
         .expertise-card h3 {
@@ -221,7 +228,7 @@
         }
 
         .expertise-list li::before {
-            content: '→';
+            content: '\2192';
             color: var(--accent);
             font-weight: bold;
             font-size: 1.2rem;
@@ -386,7 +393,7 @@
         }
 
         .timeline-content ul li::before {
-            content: '•';
+            content: '\2022';
             color: var(--accent);
             position: absolute;
             left: 0;
@@ -485,6 +492,8 @@
             height: 300px;
             background: var(--light-accent);
             overflow: hidden;
+            border: 3px solid var(--border);
+            border-radius: 10px;
             cursor: pointer;
         }
 
@@ -495,8 +504,38 @@
             transition: transform 0.4s ease;
         }
 
+        .portfolio-item:hover .portfolio-image {
+            border-color: var(--accent);
+            box-shadow: 0 8px 25px rgba(255, 153, 0, 0.2);
+        }
+
         .portfolio-item:hover .portfolio-image img {
-            transform: scale(1.05);
+            transform: scale(1.08);
+        }
+
+        /* Magnifying glass overlay */
+        .portfolio-image::after {
+            content: '\1F50D';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 3rem;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            pointer-events: none;
+            background: rgba(255, 255, 255, 0.95);
+            width: 80px;
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        .portfolio-item:hover .portfolio-image::after {
+            opacity: 1;
         }
 
         .image-placeholder {
@@ -536,91 +575,6 @@
             color: var(--text-secondary);
             line-height: 1.8;
             font-size: 1.05rem;
-        }
-
-        /* Lightbox Styles */
-        .lightbox {
-            display: none;
-            position: fixed;
-            z-index: 9999;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.95);
-            animation: fadeIn 0.3s ease;
-        }
-
-        .lightbox.active {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .lightbox-content {
-            position: relative;
-            max-width: 90%;
-            max-height: 90%;
-            animation: scaleIn 0.3s ease;
-        }
-
-        @keyframes scaleIn {
-            from {
-                transform: scale(0.8);
-                opacity: 0;
-            }
-            to {
-                transform: scale(1);
-                opacity: 1;
-            }
-        }
-
-        .lightbox-content img {
-            max-width: 100%;
-            max-height: 90vh;
-            display: block;
-            margin: 0 auto;
-            border-radius: 8px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.5);
-        }
-
-        .lightbox-close {
-            position: absolute;
-            top: 20px;
-            right: 30px;
-            font-size: 40px;
-            font-weight: bold;
-            color: white;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            z-index: 10000;
-            background: rgba(0,0,0,0.5);
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            line-height: 1;
-        }
-
-        .lightbox-close:hover {
-            background: var(--accent);
-            transform: rotate(90deg);
-        }
-
-        .lightbox-caption {
-            position: absolute;
-            bottom: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            color: white;
-            background: rgba(0,0,0,0.7);
-            padding: 1rem 2rem;
-            border-radius: 25px;
-            font-size: 1.1rem;
-            max-width: 80%;
-            text-align: center;
         }
 
         /* Contact Section */
@@ -731,19 +685,109 @@
                 grid-template-columns: repeat(2, 1fr);
                 gap: 2rem;
             }
+        }
 
-            .lightbox-close {
-                top: 10px;
-                right: 10px;
-                font-size: 30px;
-                width: 40px;
-                height: 40px;
-            }
+        /* Password Protection Overlay */
+        #password-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(26, 26, 26, 0.7);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+        }
 
-            .lightbox-caption {
-                font-size: 0.9rem;
-                padding: 0.75rem 1.5rem;
-            }
+        #password-overlay.hidden {
+            display: none;
+        }
+
+        .password-container {
+            background: white;
+            padding: 3rem;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            text-align: center;
+            max-width: 400px;
+            width: 90%;
+        }
+
+        .password-container h2 {
+            font-family: 'Crimson Text', serif;
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+
+        .password-container p {
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+        }
+
+        .password-input-group {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .password-container input {
+            flex: 1;
+            padding: 1rem;
+            border: 2px solid var(--border);
+            border-radius: 10px;
+            font-size: 1rem;
+            font-family: 'Inter', sans-serif;
+            transition: border-color 0.3s ease;
+        }
+
+        .password-container input:focus {
+            outline: none;
+            border-color: var(--accent);
+        }
+
+        .password-container button {
+            padding: 1rem 1.5rem;
+            background: var(--accent);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .password-container button:hover {
+            background: var(--accent-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(255, 153, 0, 0.3);
+        }
+
+        .password-error {
+            color: #f44336;
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+            display: none;
+        }
+
+        .password-error.show {
+            display: block;
+        }
+
+        body.locked {
+            overflow: hidden;
+        }
+
+        body.locked > *:not(#password-overlay) {
+            filter: blur(10px);
         }
 
         /* Smooth Scroll */
@@ -765,6 +809,21 @@
     </style>
 </head>
 <body>
+    <!-- Password Protection Overlay -->
+    <div id="password-overlay">
+        <div class="password-container">
+            <h2>&#128274; Portfolio Access</h2>
+            <p>Please enter the password to view this portfolio</p>
+            <div class="password-input-group">
+                <input type="password" id="password-input" placeholder="Enter password" autocomplete="off">
+                <button onclick="checkPassword()">
+                    <span>&rarr;</span>
+                </button>
+            </div>
+            <div class="password-error" id="password-error">Incorrect password. Please try again.</div>
+        </div>
+    </div>
+
     <!-- Hero Section -->
     <section class="hero">
         <div class="hero-content">
@@ -775,14 +834,14 @@
                 <div class="cta-buttons">
                     <a href="#portfolio" class="btn btn-primary">
                         <span>View Portfolio</span>
-                        <span>→</span>
+                        <span>&rarr;</span>
                     </a>
                     <a href="#experience" class="btn btn-secondary">
                         <span>View Experience</span>
                     </a>
-                    <a href="https://www.linkedin.com/in/janmcghee/" target="_blank" class="btn btn-secondary">
+                    <a href="https://www.linkedin.com/in/janmcghee/" target="_blank" class="btn btn-linkedin">
                         <span>LinkedIn Profile</span>
-                        <span>→</span>
+                        <span>&rarr;</span>
                     </a>
                 </div>
             </div>
@@ -825,7 +884,7 @@
         </div>
     </section>
 
-    <!-- Portfolio Section (MOVED UP) -->
+    <!-- Portfolio Section -->
     <section id="portfolio" class="section">
         <div class="section-header reveal">
             <h2>Featured Work</h2>
@@ -833,54 +892,50 @@
         </div>
         <div class="portfolio-grid">
             <div class="portfolio-item reveal">
-                <div class="portfolio-image" onclick="openLightbox('./images/Email_HMD.jpg', 'Customer Email and Satisfaction Surveys')">
-                    <img src="./images/Email_HMD.jpg" alt="Customer Email and Satisfaction Surveys">
+                <div class="portfolio-image">
+                    <img id="portfolio-img-1" src="./images/CRPproblemexpanded.png" alt="Customer Problem Resolution System" style="display: block;">
+                    <div class="image-placeholder" style="display: none;">
+                        <span>ðŸ“·</span>
+                        <p>Upload Image 1</p>
+                    </div>
                 </div>
                 <div class="portfolio-content">
-                    <h3>Customer Email and Satisfaction Surveys</h3>
-                    <p class="portfolio-description">To deliver incremental value to customers, I designed an email that could serve as a stand-in for more expensive UI development, as well as provide usage and test data for major process changes. This email ultimately served as a primary engagement point and delivered a 47% reduction in customer non-response rates, which ultimately drove a 40% reduction in downstream case volume.</p>
+                    <h3 id="portfolio-title-1">Customer Problem Resolution System</h3>
+                    <p id="portfolio-desc-1" class="portfolio-description">Reduced total case volume by 40% by increasing the amount of information available to sellers before an A-to-z Guarantee claim was even filed against them. Redesigned the problem management page to better deliver this info. Tested the hypotheses on core customer experience values of having a problem resolved in a single contact by a third-party seller adding more value than the problem being solved by the platform/Amazon while also building trust with sellers that Amazon had their back when resolving an issue.</p>
                 </div>
             </div>
             <div class="portfolio-item reveal">
-                <div class="portfolio-image" onclick="openLightbox('./images/Dashboard.jpg', 'User-facing analytics dashboard')">
-                    <img src="./images/Dashboard.jpg" alt="User-facing analytics dashboard">
+                <div class="portfolio-image">
+                    <img id="portfolio-img-2" src="./images/DesignedResolutionFlow.png" alt="User Journey Design Mapping" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" style="display: block;">
+                    <div class="image-placeholder" style="display: none;">
+                        <span>ðŸ–¼ï¸</span>
+                        <p>User Journey Workflow Design</p>
+                        <small style="opacity: 0.6; margin-top: 0.5rem;">Image: DesignedResolutionFlow.png</small>
+                    </div>
                 </div>
                 <div class="portfolio-content">
-                    <h3>User-facing analytics dashboard</h3>
-                    <p class="portfolio-description">Partnering with a UX designer and built by my S-tier dev team during a single week long Hack-a-thon, I launched a data-led dashboard that surfaces all current, proactive, and reactive insights to sellers on their customer problems. 96% of sellers who have a customer problem visit this dashboard.</p>
+                    <h3 id="portfolio-title-2">User Journey Design Mapping</h3>
+                    <p id="portfolio-desc-2" class="portfolio-description">Improved seller satisfaction by 2% on 33% of total case volume by designing a new "golden path" workflow for the highest frustration user problems. This use case was chosen to illustrate the new design because every potential event, system action, and outcome that other use cases have could occur in this single scenario.</p>
                 </div>
             </div>
             <div class="portfolio-item reveal">
-                <div class="portfolio-image" onclick="openLightbox('./images/CRPproblemexpanded.png', 'Customer Problem Resolution System')">
-                    <img src="./images/CRPproblemexpanded.png" alt="Customer Problem Resolution System">
+                <div class="portfolio-image">
+                    <img id="portfolio-img-3" src="./images/CStooling.png" alt="Internal Tooling Workflows" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <div class="image-placeholder" style="display: none;">
+                        <span>ðŸ–¼ï¸</span>
+                        <p>Internal Tooling Workflow Design</p>
+                        <small style="opacity: 0.6; margin-top: 0.5rem;">Image: CStooling.png</small>
+                    </div>
                 </div>
                 <div class="portfolio-content">
-                    <h3>Customer Problem Resolution System</h3>
-                    <p class="portfolio-description">Reduced total case volume by 40% by increasing the amount of information available to sellers before they received a customer problem.</p>
-                </div>
-            </div>
-            <div class="portfolio-item reveal">
-                <div class="portfolio-image" onclick="openLightbox('./images/DesignedResolutionFlow.png', 'User Journey Design Mapping')">
-                    <img src="./images/DesignedResolutionFlow.png" alt="User Journey Design Mapping">
-                </div>
-                <div class="portfolio-content">
-                    <h3>User Journey Design Mapping</h3>
-                    <p class="portfolio-description">Improved seller satisfaction by 2% on 33% of total case volume by designing a new "golden path" workflow for the highest frustration user problems. The primary objective in this design was to ensure there were no dead ends for the customer, the seller, or our operations teams.</p>
-                </div>
-            </div>
-            <div class="portfolio-item reveal">
-                <div class="portfolio-image" onclick="openLightbox('./images/CStooling.png', 'Internal Tooling Workflows')">
-                    <img src="./images/CStooling.png" alt="Internal Tooling Workflows">
-                </div>
-                <div class="portfolio-content">
-                    <h3>Internal Tooling Workflows</h3>
-                    <p class="portfolio-description">Eliminated 8% of manual case volume to operations by designing features that reduced repeat contacts from customers by 92% and reduced the misfile rate for cases filed by customer service teams from 22% to 5%. Pictured is a v1 mockup I designed to illustrate the basic desired functionality.</p>
+                    <h3 id="portfolio-title-3">Internal Tooling Workflows</h3>
+                    <p id="portfolio-desc-3" class="portfolio-description">Eliminated 8% of manual case volume to operations by designing features that reduced repeat contacts from customers by 92% and reduced the misfile rate for cases filed by customer service teams from 22% to 5%. Pictured is a v1 mockup I designed to illustrate the basic desired functionality.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Experience Section (MOVED DOWN) -->
+    <!-- Experience Section -->
     <section id="experience" class="section">
         <div class="section-header reveal">
             <h2>Professional Journey</h2>
@@ -890,7 +945,7 @@
                 <div class="timeline-content">
                     <h3>Product Manager II</h3>
                     <div class="company">Amazon.com | Seattle, WA</div>
-                    <div class="date">January 2019 – February 2024</div>
+                    <div class="date">January 2019 â€“ February 2024</div>
                     <p>Led product strategy for the A-to-z Guarantee platform, serving millions of customers and third-party sellers.</p>
                     <ul>
                         <li>Launched <span class="highlight">4 new products and 70+ features</span> supporting 10.6M yearly customers and 2.1M third-party sellers</li>
@@ -906,7 +961,7 @@
                 <div class="timeline-content">
                     <h3>Risk & Policy Manager</h3>
                     <div class="company">Amazon.com | Seattle, WA</div>
-                    <div class="date">June 2018 – January 2019</div>
+                    <div class="date">June 2018 â€“ January 2019</div>
                     <p>Served as interim Product Owner during critical operational challenges.</p>
                     <ul>
                         <li>Resolved <span class="highlight">42-day backlog of 1.2M cases</span> against 7-day SLA</li>
@@ -921,7 +976,7 @@
                 <div class="timeline-content">
                     <h3>Sr. Investigation Specialist</h3>
                     <div class="company">Amazon.com | Seattle, WA</div>
-                    <div class="date">August 2016 – June 2018</div>
+                    <div class="date">August 2016 â€“ June 2018</div>
                     <p>Exceeded performance metrics while redesigning operational processes.</p>
                     <ul>
                         <li>Exceeded performance targets by <span class="highlight">50%</span> (21 vs. 14 investigations per hour)</li>
@@ -976,6 +1031,7 @@
         </div>
     </section>
 
+
     <!-- Education & Languages -->
     <section class="section">
         <div class="section-header reveal">
@@ -987,7 +1043,7 @@
                 <p style="margin-top: 1rem; color: var(--text-secondary); line-height: 1.8;">
                     <strong>Product Management Studio</strong><br>
                     UC Berkeley Executive Education | 2025<br><br>
-                    <strong>B.A. History</strong><br>
+                    <strong>B.A. History (Incomplete)</strong><br>
                     Montana State University | 2009-2014
                 </p>
             </div>
@@ -1011,64 +1067,21 @@
             <div class="contact-links">
                 <a href="https://www.linkedin.com/in/janmcghee/" target="_blank" class="contact-link">
                     <span>LinkedIn</span>
-                    <span>↗</span>
+                    <span>&nearr;</span>
                 </a>
-                <a href="mailto:jan@example.com" class="contact-link">
+                <a href="/cdn-cgi/l/email-protection#462c2728682b25212e2323767f06212b272f2a6825292b" class="contact-link">
                     <span>Email</span>
-                    <span>↗</span>
+                    <span>&nearr;</span>
                 </a>
                 <a href="tel:+15103685164" class="contact-link">
                     <span>Phone</span>
-                    <span>↗</span>
+                    <span>&nearr;</span>
                 </a>
             </div>
         </div>
     </section>
 
-    <!-- Lightbox Modal -->
-    <div id="lightbox" class="lightbox" onclick="closeLightbox(event)">
-        <span class="lightbox-close" onclick="closeLightbox(event)">&times;</span>
-        <div class="lightbox-content">
-            <img id="lightbox-img" src="" alt="">
-            <div class="lightbox-caption" id="lightbox-caption"></div>
-        </div>
-    </div>
-
-    <script>
-        // Lightbox Functions
-        function openLightbox(imgSrc, caption) {
-            const lightbox = document.getElementById('lightbox');
-            const lightboxImg = document.getElementById('lightbox-img');
-            const lightboxCaption = document.getElementById('lightbox-caption');
-            
-            lightbox.classList.add('active');
-            lightboxImg.src = imgSrc;
-            lightboxCaption.textContent = caption;
-            document.body.style.overflow = 'hidden';
-        }
-
-        function closeLightbox(event) {
-            const lightbox = document.getElementById('lightbox');
-            const lightboxContent = document.querySelector('.lightbox-content');
-            
-            // Only close if clicking outside the image or on close button
-            if (event.target === lightbox || event.target.classList.contains('lightbox-close')) {
-                lightbox.classList.remove('active');
-                document.body.style.overflow = 'auto';
-            }
-        }
-
-        // Close lightbox with Escape key
-        document.addEventListener('keydown', function(event) {
-            if (event.key === 'Escape') {
-                const lightbox = document.getElementById('lightbox');
-                if (lightbox.classList.contains('active')) {
-                    lightbox.classList.remove('active');
-                    document.body.style.overflow = 'auto';
-                }
-            }
-        });
-
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
         // Reveal animation on scroll
         const reveals = document.querySelectorAll('.reveal');
         
@@ -1135,18 +1148,21 @@
                     const text = numberElement.innerText;
                     
                     if (text.includes('$') && text.includes('M')) {
+                        // Extract the number from text like "$15.3M+"
                         const matches = text.match(/\$([\d.]+)M/);
                         if (matches) {
                             const num = parseFloat(matches[1]);
                             animateValue(numberElement, 0, num, 1500, '$', 'M+');
                         }
                     } else if (text.includes('M')) {
+                        // Extract the number from text like "10.6M"
                         const matches = text.match(/([\d.]+)M/);
                         if (matches) {
                             const num = parseFloat(matches[1]);
                             animateValue(numberElement, 0, num, 1500, '', 'M');
                         }
                     } else if (text.includes('%')) {
+                        // Extract the number from text like "32%"
                         const matches = text.match(/([\d]+)%/);
                         if (matches) {
                             const num = parseInt(matches[1]);
@@ -1160,6 +1176,50 @@
         document.querySelectorAll('.impact-item').forEach(item => {
             impactObserver.observe(item);
         });
+
+        // Password Protection
+        const correctPassword = 'K9mP4xR7sL';
+        
+        if (sessionStorage.getItem('portfolioAuth') === 'true') {
+            document.getElementById('password-overlay').classList.add('hidden');
+            document.body.classList.remove('locked');
+        } else {
+            document.body.classList.add('locked');
+        }
+
+        function checkPassword() {
+            const input = document.getElementById('password-input');
+            const error = document.getElementById('password-error');
+            
+            if (input.value === correctPassword) {
+                sessionStorage.setItem('portfolioAuth', 'true');
+                document.getElementById('password-overlay').classList.add('hidden');
+                document.body.classList.remove('locked');
+                error.classList.remove('show');
+            } else {
+                error.classList.add('show');
+                input.value = '';
+                input.focus();
+                input.style.animation = 'shake 0.5s';
+                setTimeout(() => { input.style.animation = ''; }, 500);
+            }
+        }
+
+        document.getElementById('password-input').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                checkPassword();
+            }
+        });
+
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes shake {
+                0%, 100% { transform: translateX(0); }
+                25% { transform: translateX(-10px); }
+                75% { transform: translateX(10px); }
+            }
+        `;
+        document.head.appendChild(style);
     </script>
 </body>
 </html>
