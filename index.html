@@ -792,7 +792,9 @@
 
         /* Lightbox Styles */
         .lightbox {
-            display: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             position: fixed;
             top: 0;
             left: 0;
@@ -801,14 +803,13 @@
             background: rgba(0, 0, 0, 0.95);
             z-index: 10000;
             opacity: 0;
-            transition: opacity 0.3s ease;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
         }
 
         .lightbox.active {
-            display: flex;
-            align-items: center;
-            justify-content: center;
             opacity: 1;
+            visibility: visible;
         }
 
         .lightbox-content {
@@ -1291,10 +1292,16 @@
             const lightboxImg = document.getElementById('lightbox-img');
             const lightboxTitle = document.getElementById('lightbox-title');
             
+            // Set the image source and title
             lightboxImg.src = imageSrc;
             lightboxTitle.textContent = imageTitle;
+            
+            // Show lightbox
             lightbox.classList.add('active');
             document.body.style.overflow = 'hidden';
+            
+            // Debug: log what we're loading
+            console.log('Opening lightbox with image:', imageSrc);
         }
 
         function closeLightbox() {
