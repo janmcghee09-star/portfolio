@@ -465,6 +465,116 @@
             transform: scale(1.05);
         }
 
+        /* Live Prototypes Section */
+        .prototypes-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 3rem;
+            margin-top: 3rem;
+        }
+
+        .prototype-item {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+            transition: all 0.4s ease;
+        }
+
+        .prototype-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+        }
+
+        .prototype-preview {
+            position: relative;
+            width: 100%;
+            height: 300px;
+            overflow: hidden;
+            cursor: pointer;
+            background: var(--light-accent);
+        }
+
+        .prototype-preview img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.4s ease;
+        }
+
+        .prototype-item:hover .prototype-preview img {
+            transform: scale(1.05);
+        }
+
+        .prototype-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .prototype-item:hover .prototype-overlay {
+            opacity: 1;
+        }
+
+        .launch-button {
+            background: var(--accent);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(255, 153, 0, 0.3);
+        }
+
+        .launch-button:hover {
+            background: var(--accent-dark);
+            transform: scale(1.05);
+        }
+
+        .prototype-content {
+            padding: 2rem;
+        }
+
+        .prototype-content h3 {
+            font-family: 'Crimson Text', serif;
+            font-size: 1.6rem;
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+
+        .prototype-description {
+            color: var(--text-secondary);
+            line-height: 1.8;
+            font-size: 1.05rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .prototype-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .prototype-tag {
+            background: var(--light-accent);
+            color: var(--text-primary);
+            padding: 0.4rem 0.9rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+
         /* Portfolio Section */
         .portfolio-grid {
             display: grid;
@@ -913,8 +1023,8 @@
                 <p class="tagline">Senior Product Manager</p>
                 <p>Product leader with 5+ years of experience launching and scaling products to 10M+ customers and 2M+ client businesses. Expert in trust & safety, operations automation, and transformative product strategies.</p>
                 <div class="cta-buttons">
-                    <a href="#portfolio" class="btn btn-primary">
-                        <span>View Portfolio</span>
+                    <a href="#prototypes" class="btn btn-primary">
+                        <span>View Live Demos</span>
                         <span>&rarr;</span>
                     </a>
                     <a href="#experience" class="btn btn-secondary">
@@ -965,7 +1075,38 @@
         </div>
     </section>
 
-    <!-- Portfolio Section -->
+    <!-- Live Prototypes Section -->
+    <section id="prototypes" class="section">
+        <div class="section-header reveal">
+            <h2>Live Prototypes</h2>
+            <p style="color: var(--text-secondary); max-width: 700px; margin: 1rem auto 0;">Interactive demos and prototypes showcasing product thinking, user experience design, and technical execution.</p>
+        </div>
+        <div class="prototypes-grid">
+            <!-- Prototype Item 1: Placeholder -->
+            <div class="prototype-item reveal">
+                <div class="prototype-preview">
+                    <img src="./images/SPORTCONNECT_PROTOTYPE_PREVIEW.png" alt="Prototype Preview">
+                    <div class="prototype-overlay">
+                        <div class="launch-button">
+                            <span>Launch Demo</span>
+                            <span style="margin-left: 0.5rem;">→</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="prototype-content">
+                    <h3>SportConnect</h3>
+                    <p class="prototype-description">A wireframe of 3 critical user flows for SportConnect, a revolutionary platform that transforms how people find their place in local sports communities. This product solves the biggest barrier to recreational sports participation: not knowing if you'll fit in. Despite a $4.64 billion adult social sports market with 242 million Americans participating in sports/fitness and 20% planning to join leagues, the lack of social integration support creates massive participation barriers in the 130 million Americans living in mid-size cities where community-based solutions are most needed.</p>
+                    <div class="prototype-meta">
+                        <span class="prototype-tag">Product Design</span>
+                        <span class="prototype-tag">User Research</span>
+                        <span class="prototype-tag">Prototyping</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+        <!-- Portfolio Section -->
     <section id="portfolio" class="section">
         <div class="section-header reveal">
             <h2>Featured Work</h2>
@@ -1272,6 +1413,17 @@
             impactObserver.observe(item);
         });
 
+
+
+        // Prototype items - open in new tab
+        document.querySelectorAll('.prototype-preview').forEach(function(preview) {
+            preview.addEventListener('click', function() {
+                const prototypeUrl = this.getAttribute('data-url');
+                if (prototypeUrl) {
+                    window.open(prototypeUrl, '_blank');
+                }
+            });
+        });
 
         // Lightbox functionality
         function openLightbox(imageSrc, imageTitle) {
