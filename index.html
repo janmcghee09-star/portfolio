@@ -581,6 +581,31 @@
             font-weight: 500;
         }
 
+        /* Featured Work Disclaimer Box */
+        .work-disclaimer {
+            background: #fff3e0;
+            border-left: 4px solid #ff9900;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 2rem auto 3rem;
+            max-width: 900px;
+            box-shadow: 0 4px 12px rgba(255, 153, 0, 0.1);
+        }
+
+        .work-disclaimer-title {
+            font-weight: 600;
+            color: #1a1a1a;
+            margin-bottom: 0.5rem;
+            font-size: 1rem;
+        }
+
+        .work-disclaimer-text {
+            color: #666;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin: 0;
+        }
+        
         /* Portfolio Section */
         .portfolio-grid {
             display: grid;
@@ -1138,6 +1163,13 @@
             <h2>Featured Work</h2>
             <p style="color: var(--text-secondary); max-width: 700px; margin: 1rem auto 0;">A selection of projects and initiatives that demonstrate strategic thinking, execution excellence, and measurable impact.</p>
         </div>
+        
+            <!-- Disclaimer Box -->
+        <div class="work-disclaimer reveal">
+            <div class="work-disclaimer-title">Note on Data Privacy</div>
+            <p class="work-disclaimer-text">All data, screenshots, and metrics shown are anonymized or represent test data from development environments. No actual customer or business information is displayed.</p>
+        </div>
+        
         <div class="portfolio-grid">
             <!-- Portfolio Item 1: Dashboard -->
             <div class="portfolio-item reveal">
